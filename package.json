@@ -1,5 +1,5 @@
 {
-  "name": "cool-domains",
+  "name": "blocc-domains",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "react-scripts": "^5.0.1"
   }
 }
