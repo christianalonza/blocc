@@ -18,3 +18,4 @@ npx hardhat run scripts/deploy.js
 # bloccdomains
 # bloccdomains
 # blocc-name-service
+# blocc-name-service
