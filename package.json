@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +19,8 @@
     "chai": "^4.3.7",
     "ethers": "^5.7.2",
     "hardhat": "^2.12.2",
-    "npx": "^10.2.2"
+    "npx": "^10.2.2",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
