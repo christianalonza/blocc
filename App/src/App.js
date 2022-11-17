@@ -75,10 +75,10 @@ const App = () => {
   const switchNetwork = async () => {
   if (window.ethereum) {
     try {
-      // Try to switch to the Mumbai testnet
+      // Try to switch to the Polygon Mainnet
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x13881' }], // Check networks.js for hexadecimal network ids
+        params: [{ chainId: '0x89' }], // Check networks.js for hexadecimal network ids
       });
     } catch (error) {
       // This error code means that the chain we want has not been added to MetaMask
@@ -89,15 +89,15 @@ const App = () => {
             method: 'wallet_addEthereumChain',
             params: [
               {	
-                chainId: '0x13881',
-                chainName: 'Polygon Mumbai Testnet',
-                rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+                chainId: '0x89',
+                chainName: 'Polygon Mainnet',
+                rpcUrls: ['https://polygon-rpc.com/'],
                 nativeCurrency: {
-                    name: "Mumbai Matic",
+                    name: "Polygon Mainnet",
                     symbol: "MATIC",
                     decimals: 18
                 },
-                blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
+                blockExplorerUrls: ["https://polygonscan.com/"]
               },
             ],
           });
@@ -138,13 +138,13 @@ const mintDomain = async () => {
 
 			// Check if the transaction was successfully completed
 			if (receipt.status === 1) {
-				console.log("Domain minted! https://mumbai.polygonscan.com/tx/"+tx.hash);
+				console.log("Domain minted! https://polygonscan.com/tx/"+tx.hash);
 				
 				// Set the record for the domain
 				tx = await contract.setRecord(domain, record);
 				await tx.wait();
 
-				console.log("Record set! https://mumbai.polygonscan.com/tx/"+tx.hash);
+				console.log("Record set! https://polygonscan.com/tx/"+tx.hash);
 
         // Call fetchMints after 2 seconds
         setTimeout(() => {
@@ -197,7 +197,7 @@ const fetchMints = async () => {
 
 // This will run any time currentAccount or network are changed
 useEffect(() => {
-  if (network === 'Polygon Mumbai Testnet') {
+  if (network === 'Polygon Mainnet') {
     fetchMints();
   }
 }, [currentAccount, network]);
@@ -215,7 +215,7 @@ const updateDomain = async () => {
 
       let tx = await contract.setRecord(domain, record);
       await tx.wait();
-      console.log("Record set https://mumbai.polygonscan.com/tx/"+tx.hash);
+      console.log("Record set https://polygonscan.com/tx/"+tx.hash);
 
       fetchMints();
       setRecord('');
@@ -247,7 +247,7 @@ const renderMints = () => {
             return (
               <div className="mint-item" key={index}>
                 <div className='mint-row'>
-                  <a className="link" href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${mint.id}`} target="_blank" rel="noopener noreferrer">
+                  <a className="link" href={`https://opensea.io/assets/${CONTRACT_ADDRESS}/${mint.id}`} target="_blank" rel="noopener noreferrer">
                     <p className="underlined">{' '}{mint.name}{tld}{' '}</p>
                   </a>
                   {/* If mint.owner is currentAccount, add an "edit" button*/}
@@ -275,13 +275,13 @@ const editRecord = (name) => {
 }
 	// Form to enter domain name and data
 	const renderInputForm = () =>{
-     // If not on Polygon Mumbai Testnet, render "Please connect to Polygon Mumbai Testnet"
-  if (network !== 'Polygon Mumbai Testnet') {
-    // If not on Polygon Mumbai Testnet, render the switch button
-  if (network !== 'Polygon Mumbai Testnet') {
+     // If not on Polygon Mainnet, render "Please connect to Polygon Mainnet"
+  if (network !== 'Polygon Mainnet') {
+    // If not on Polygon Mainnet, render the switch button
+  if (network !== 'Polygon Mainnet') {
     return (
       <div className="connect-wallet-container">
-        <h2>Please switch to Polygon Mumbai Testnet</h2>
+        <h2>Please switch to Polygon Mainnet</h2>
         {/* This button will call our switch network function */}
         <button className='cta-button mint-button' onClick={switchNetwork}>Click here to switch</button>
       </div>
@@ -289,7 +289,7 @@ const editRecord = (name) => {
   }
     return (
       <div className="connect-wallet-container">
-        <p>Please connect to the Polygon Mumbai Testnet</p>
+        <p>Please connect to the Polygon Mainnet</p>
       </div>
     );
   }
